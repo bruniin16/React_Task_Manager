@@ -1,22 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./components/AddTask";
 import Tasks from "./components/Tasks";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Estudar React",
-      description: "Estudar React para projetos.",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Estudar Docker",
-      description: "Estudar Docker para projetos.",
-      isCompleted: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || [] //joga o que ta salvo no localStorage para o state
+  );
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]); //roda a função se algo na lista for alterado.
 
   function onTaskClick(taskId) {
     const newTasks = tasks.map((task) => {
@@ -48,7 +41,7 @@ function App() {
     <div className="w-screen h-screen bg-zinc-900 flex justify-center p-6">
       <div className="w-[500px] space-y-4">
         <h1 className="text-3xl text-slate-100 font-bold text-center">
-          Gerenciador de Tarefas
+          Task Manager
         </h1>
         <AddTask onAddTaskClick={onAddTaskClick} />
         <Tasks
