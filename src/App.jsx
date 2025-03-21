@@ -16,12 +16,6 @@ function App() {
       description: "Estudar Docker para projetos.",
       isCompleted: false,
     },
-    {
-      id: 3,
-      title: "comer alguem",
-      description: "Desestressar",
-      isCompleted: false,
-    },
   ]);
 
   function onTaskClick(taskId) {

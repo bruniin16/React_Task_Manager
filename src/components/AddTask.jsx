@@ -22,7 +22,8 @@ function AddTask({ onAddTaskClick }) {
       />
       <button
         onClick={() => {
-          if (!title.trim || !description.trim) {
+          if (!title.trim() || !description.trim()) {
+            //TRIM NAO FUNCIONANDO
             return alert("Preencha o título e a descrição.");
           }
           onAddTaskClick(title, description);
